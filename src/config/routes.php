@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'newgame'=>'newgame/view',
     'home'=>'home/view',
     'newtest'=>'newtest/view',
     'test/([0-9]+)' => 'testview/view/$1',

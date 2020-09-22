@@ -20,4 +20,4 @@ public function loadTestPreview($amount_row = 3, $curent_page){
     $preview_test_arr  = $result->fetchAll();
     return $preview_test_arr;
 }
-}loh
+}
