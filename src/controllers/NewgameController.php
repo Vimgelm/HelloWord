@@ -9,14 +9,12 @@ class NewgameController extends AbstractController
     private $title = "game";
     private $world_arr;
     private $data = array();
-    private $field_row = 3;
-    private $field_col = 3;
+    private $field_row = 20;
+    private $field_col = 20;
 
    function __construct($path)
    {
        parent::__construct($path);
-       $this->data['field_row'] = $this->field_row;
-       $this->data['field_col'] = $this->field_col;
    }
 
     public function actionView()
