@@ -14,20 +14,21 @@ class UnitMob extends AbstractUnit
     private $health;
     private $energy;
     private $coordinates;
-    protected $logic;
 
     function __construct($coordinates)
     {
         $this->coordinates = $coordinates;
-        $this->logic = new MobLogic($coordinates);
     }
 
-    public function unit_move()// receive float value
+    public function unit_move()
     {
-        $coordinates = $this->logic->changeDirection();
-        $this->coordinates = $coordinates; // update current coordinate
-        //change coordinate to world obj
-        $_SESSION['world']->setValue($this->coordinates,UNIT);
+        $logic = new MobLogic($this->coordinates);
+        $coord = $logic->changeDirection();
+        $prev_coordinates = $this->coordinates;
+        $this->coordinates = $coord; // update current coordinate
+        $cell_value = $_SESSION['world']->getValue($this->coordinates); //get current cell value
+        $_SESSION['world']->setValue($prev_coordinates, $cell_value); //return prev value
+        $_SESSION['world']->setValue($this->coordinates, UNIT); //change coordinate to world obj
     }
 
 }

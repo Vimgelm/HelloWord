@@ -18,7 +18,12 @@ class WorldObj
     public function setValue($coordinates, $unit)
     {
         $this->world_arr[$coordinates['1']][$coordinates['2']] = $unit;
+    }
 
+    public function getValue($coordinates)
+    {
+        $cell_value = $this->world_arr[$coordinates['1']][$coordinates['2']];
+        return $cell_value;
     }
 
     public function getWorldArr()
