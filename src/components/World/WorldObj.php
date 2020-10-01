@@ -30,4 +30,14 @@ class WorldObj
     {
         return $this->world_arr;
     }
+
+    public function getAroundValue($direction_arr)
+    {
+        for ($i = 1; $i <= count($direction_arr); $i++) {
+            foreach ($direction_arr[$i] as $key => $value) {
+                $direction_arr[$i]['3'] = $this->world_arr[$direction_arr[$i][$key]]; //get terrain value for around unit
+            }
+        }
+        return $direction_arr;
+    }
 }
