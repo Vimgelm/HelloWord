@@ -26,6 +26,7 @@ class UnitMob extends AbstractUnit
         $coord = $logic->changeDirection();
         $prev_coordinates = $this->coordinates;
         $this->coordinates = $coord; // update current coordinate
+        $_SESSION['world']->setCurrentCoord($coord);
         $cell_value = $_SESSION['world']->getValue($this->coordinates); //get current cell value
         $_SESSION['world']->setValue($prev_coordinates, $cell_value); //return prev value
         $_SESSION['world']->setValue($this->coordinates, UNIT); //change coordinate to world obj

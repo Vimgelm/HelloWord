@@ -13,7 +13,7 @@ class NewgameController extends AbstractController
     private $data = array();
     private $field_row = 20;
     private $field_col = 20;
-    private $unit_arr = array('1'=>'mob');
+    private $unit_arr = array('1'=>'mob','2'=>'mob','3'=>'mob','4'=>'mob','5'=>'mob');
 
     function __construct($path)
     {
@@ -26,7 +26,7 @@ class NewgameController extends AbstractController
     {
         if (isset($_POST['load_data'])) {
             $control = new MassController();
-            $control->nextStep();
+            $control->nextStep($this->unit_arr);
             $this->world_arr = $_SESSION['world']->getWorldArr();
             echo(json_encode($this->world_arr));// return world in table
         } else {

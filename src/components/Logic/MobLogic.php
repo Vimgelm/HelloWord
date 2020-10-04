@@ -3,7 +3,6 @@
 
 namespace App\components\Logic;
 
-
 class MobLogic
 {
     private $border_field = array('1' => '1', '2' => '20'); //coordinates out the field
@@ -17,9 +16,10 @@ class MobLogic
     public function changeDirection() //change random direction
     {
         $direction_arr = $this->makeDirectionArr();
-        $pol_arr = $this->filterDirectionArr($direction_arr);
+        $direction_value = $_SESSION['world']->getAroundValue($direction_arr);
+        $pol_arr = $this->filterDirectionArr($direction_value);
         $current_coordinates = array_rand($pol_arr); //return direction coordinates
-        $current_coordinates = $pol_arr[$current_coordinates];
+        $current_coordinates = $direction_arr[$current_coordinates];
         return $current_coordinates;
     }
 
@@ -65,11 +65,11 @@ class MobLogic
         return $directions_arr;
     }
 
-    private function filterDirectionArr($direction_arr)
+    private function filterDirectionArr($direction_arr) //TODO сделать нормальную фильтрацию с разными типоми данных!!!
     {
         for ($i = 1; $i <= 8; $i++) {
             foreach ($direction_arr[$i] as $key => $value) {
-                if ($value < $this->border_field['1'] or $value > $this->border_field['2']) {
+                if ($value < $this->border_field['1'] or $value > $this->border_field['2'] or $value === 'M') {
                     unset($direction_arr[$i]);
                 }
             }
