@@ -26,7 +26,12 @@ class WorldObj
         return $cell_value;
     }
 
-    public function getWorldArr()
+    public function deleteValue($coordinates)
+    {
+        $this->world_arr[$coordinates['1']][$coordinates['2']] = '2'; // '2' - empty cell
+    }
+
+    public function getWorldArr() // world for view
     {
         return $this->world_arr;
     }
@@ -39,14 +44,15 @@ class WorldObj
     public function getAroundValue($direction_arr)
     {
         for ($i = 1; $i <= count($direction_arr); $i++) {
-            if ($direction_arr[$i]['1'] == null or $direction_arr[$i]['2'] == null) {
-                $direction_arr[$i]['3'] = null;
-                break;
+            if ($direction_arr[$i]['1'] < 1
+                or $direction_arr[$i]['1'] > 20
+                or $direction_arr[$i]['2'] < 1
+                or $direction_arr[$i]['2'] > 20) {
+                $direction_arr[$i]['3'] = 0;
             } else {
-                if (isset($this->world_arr[$direction_arr[$i]['1']][$direction_arr[$i]['2']])){
+                if (isset($this->world_arr[$direction_arr[$i]['1']][$direction_arr[$i]['2']])) {
                     $direction_arr[$i]['3'] = $this->world_arr[$direction_arr[$i]['1']][$direction_arr[$i]['2']]; //get terrain value for around unit
                 }
-
             }
         }
         return $direction_arr;

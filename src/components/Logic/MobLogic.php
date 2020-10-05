@@ -17,9 +17,9 @@ class MobLogic
     {
         $direction_arr = $this->makeDirectionArr();
         $direction_value = $_SESSION['world']->getAroundValue($direction_arr);
-        $pol_arr = $this->filterDirectionArr($direction_value);
-        $current_coordinates = array_rand($pol_arr); //return direction coordinates
-        $current_coordinates = $direction_arr[$current_coordinates];
+        $direction_filtered = $this->filterDirectionArr($direction_value);
+        $key_coordinates = self::searchFood($direction_filtered);
+        $current_coordinates = $direction_arr[$key_coordinates];
         return $current_coordinates;
     }
 
@@ -33,7 +33,7 @@ class MobLogic
                     $directions_arr['1']['2'] = $this->coordinates['2'] - 1;
                     break;
                 case 2:
-                    $directions_arr['2']['1'] = $this->coordinates['1'];
+                    $directions_arr['2']['1'] = $this->coordinates['1'] - 0;
                     $directions_arr['2']['2'] = $this->coordinates['2'] - 1;
                     break;
                 case 3:
@@ -69,11 +69,28 @@ class MobLogic
     {
         for ($i = 1; $i <= 8; $i++) {
             foreach ($direction_arr[$i] as $key => $value) {
-                if ($value < $this->border_field['1'] or $value > $this->border_field['2'] or $value === 'M') {
+                if ($value === "M") {
+                    unset($direction_arr[$i]);
+                } elseif ($value === "#") {
+                    break;
+                } elseif ($value === "@") {
+                    unset($direction_arr[$i]);
+                } elseif ($value < $this->border_field['1'] or $value > $this->border_field['2']) {
                     unset($direction_arr[$i]);
                 }
             }
         }
         return $direction_arr;
+    }
+
+    private function searchFood($direction_filtered)
+    {
+        foreach ($direction_filtered as $key => $value) {
+            if($value['3'] === '#') {
+                return $key;
+            }
+        }
+        return array_rand($direction_filtered);
+
     }
 }
