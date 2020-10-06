@@ -15,37 +15,45 @@ class UnitMob extends AbstractUnit
     private $energy = 1000;
     private $coordinates;
     private $cell_value = 2; // cell value under the unit
+    private $status = true;
 
     function __construct($coordinates)
     {
         $this->coordinates = $coordinates;
     }
 
-    public function unit_move() //TODO костыль с возращением старого значения, которое находится под юнитом (стабильно работает)
+    public function unit_move() //TODO костыль с возращением старого значения, которое находится под юнитом (стабильно работает1w)
     {
         $logic = new MobLogic($this->coordinates);
         $new_coordinates = $logic->changeDirection();
 //        $this->cell_value = $_SESSION['world']->getValue($new_coordinates); //get current cell value
-        $prev_coordinates  = self::updateCoordinates($new_coordinates);// update current coordinate
-        $_SESSION['world']->setCurrentCoord($new_coordinates); //for view unit statistic
+        $prev_coordinates = self::updateCoordinates($new_coordinates);// update current coordinate
         $_SESSION['world']->setValue($prev_coordinates, $this->cell_value); //return prev value
+        $this->status = self::unitHunger(); //check mob status (live or dead)
+        $food = $_SESSION['world']->getValue($this->coordinates);
+        if ($food === '#') {
+            self::unitEat(); //increase energy if next target food
+        }
         $_SESSION['world']->setValue($this->coordinates, UNIT); //change coordinate to world obj
+
+        //send first unit statistic for debug
+        $_SESSION['world']->setCurrentStatistic($this->coordinates, $this->health, $this->energy);
     }
 
-    public function unitEat()
+    private function unitEat()
     {
-        $this->energy + 100; // if unit ate, increase unit energy
+        $this->energy = $this->energy + 100; // if unit ate, increase unit energy
     }
 
-    public function unitHunger()
+    private function unitHunger()
     {
-        $this->energy - 50; // each step decrease energy
+        $this->energy = $this->energy - 50; // each step decrease energy
         if ($this->energy <= 0) {
-            $this->health - 10;
-            return true;
+            $this->health = $this->health - 10;
         } elseif ($this->health <= 0) {
             return false;
         }
+        return true;
     }
 
     private function updateCoordinates($new_coordinates)
@@ -53,6 +61,11 @@ class UnitMob extends AbstractUnit
         $prev_coordinates = $this->coordinates;
         $this->coordinates = $new_coordinates;
         return $prev_coordinates;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
     }
 
 

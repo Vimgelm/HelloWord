@@ -16,8 +16,12 @@ class MassController
 
     public function nextStep($unit_arr)
     {
-        for ($i = 1; $i <= count($unit_arr); $i++) {
-            $_SESSION['UnitMob'.$i]->unit_move();
+        for ($i = 1; $i <= count($_SESSION['units']); $i++) {
+            $_SESSION['units']['UnitMob' . $i]->unit_move();
+            $status = $_SESSION['units']['UnitMob' . $i]->getStatus();
+            if ($status === false) {
+                unset($_SESSION['units']['UnitMob' . $i]); //delete if here status dead
+            }
         }
 
     }

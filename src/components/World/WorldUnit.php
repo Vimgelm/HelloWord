@@ -5,7 +5,7 @@ namespace App\components\World;
 
 use App\components\Unit\UnitMob as UnitMob;
 
-class WorldUnit //fill the world
+class WorldUnit //fill the world units
 {
     private $coordinates = array();
 
@@ -15,7 +15,7 @@ class WorldUnit //fill the world
             $class_name = 'UnitMob';
             self::setCoordinates();
             $unit_obj = new UnitMob($this->coordinates);
-            $_SESSION["$class_name$i"] = $unit_obj;
+            $_SESSION['units']["$class_name$i"] = $unit_obj;
         }
     }
 

@@ -36,9 +36,11 @@ class WorldObj
         return $this->world_arr;
     }
 
-    public function setCurrentCoord($current_coordinates)
+    public function setCurrentStatistic($current_coordinates, $health, $energy)
     {
-        $this->world_arr['coordinates'] = $current_coordinates;
+        $this->world_arr['statistic']['coordinates'] = $current_coordinates;
+        $this->world_arr['statistic']['health'] = $health;
+        $this->world_arr['statistic']['energy'] = $energy;
     }
 
     public function getAroundValue($direction_arr)

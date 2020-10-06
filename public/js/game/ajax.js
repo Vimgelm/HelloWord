@@ -8,8 +8,11 @@ $(document).ready(function () {
         success: function (world_gen_arr) {
             // render world generation arr in table
             var world_gen_obj = JSON.parse(world_gen_arr);
-            $(".coordinates_row").text(world_gen_obj.coordinates['1']); //view current coordinate first mob
-            $(".coordinates_col").text(world_gen_obj.coordinates['2']);
+            //statistic
+            $(".coordinates_row").text(world_gen_obj.statistic.coordinates['2']); //view current coordinate first mob
+            $(".coordinates_col").text(world_gen_obj.statistic.coordinates['2']);
+            $(".health").text(world_gen_obj.statistic['health']);
+            $(".energy").text(world_gen_obj.statistic['energy']);
             for (var i in world_gen_obj) {
                 for (var k in world_gen_obj[i]) {
                     if (world_gen_obj[i][k] === '@') { // colorize '@' in red color
