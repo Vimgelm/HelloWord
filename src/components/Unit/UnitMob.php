@@ -11,7 +11,7 @@ define("UNIT", "@");
 
 class UnitMob extends AbstractUnit
 {
-    private $health = 100;
+    private $health = 200;
     private $energy = 1000;
     private $coordinates;
     private $cell_value = 2; // cell value under the unit
