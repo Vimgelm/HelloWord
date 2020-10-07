@@ -47,7 +47,7 @@ class UnitMob extends AbstractUnit
 
     private function unitEat()
     {
-        $this->energy = $this->energy + 100; // if unit ate, increase unit energy
+        $this->energy = $this->energy + 200; // if unit ate, increase unit energy
     }
 
     private function unitHunger()
