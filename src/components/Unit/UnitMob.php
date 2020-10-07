@@ -15,11 +15,16 @@ class UnitMob extends AbstractUnit
     private $energy = 1000;
     private $coordinates;
     private $cell_value = 2; // cell value under the unit
-    private $status = true;
+    private $status;
 
     function __construct($coordinates)
     {
         $this->coordinates = $coordinates;
+    }
+
+    function __destruct()
+    {
+        $_SESSION['world']->setValue($this->coordinates, $this->cell_value);
     }
 
     public function unit_move() //TODO костыль с возращением старого значения, которое находится под юнитом (стабильно работает1w)
@@ -29,7 +34,7 @@ class UnitMob extends AbstractUnit
 //        $this->cell_value = $_SESSION['world']->getValue($new_coordinates); //get current cell value
         $prev_coordinates = self::updateCoordinates($new_coordinates);// update current coordinate
         $_SESSION['world']->setValue($prev_coordinates, $this->cell_value); //return prev value
-        $this->status = self::unitHunger(); //check mob status (live or dead)
+        self::unitHunger(); //check mob status (live or dead)
         $food = $_SESSION['world']->getValue($this->coordinates);
         if ($food === '#') {
             self::unitEat(); //increase energy if next target food
@@ -49,11 +54,14 @@ class UnitMob extends AbstractUnit
     {
         $this->energy = $this->energy - 50; // each step decrease energy
         if ($this->energy <= 0) {
+            $this->energy = 0; //crutch
             $this->health = $this->health - 10;
-        } elseif ($this->health <= 0) {
-            return false;
         }
-        return true;
+        if ($this->health <= 0) {
+            $this->status = false;
+        } else {
+            $this->status = true;
+        }
     }
 
     private function updateCoordinates($new_coordinates)

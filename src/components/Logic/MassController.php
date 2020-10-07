@@ -14,15 +14,14 @@ class MassController
 
     }
 
-    public function nextStep($unit_arr)
+    public function nextStep()
     {
-        for ($i = 1; $i <= count($_SESSION['units']); $i++) {
-            $_SESSION['units']['UnitMob' . $i]->unit_move();
-            $status = $_SESSION['units']['UnitMob' . $i]->getStatus();
+        foreach ($_SESSION['units'] as $key => $value){
+            $value->unit_move();
+            $status = $value->getStatus();
             if ($status === false) {
-                unset($_SESSION['units']['UnitMob' . $i]); //delete if here status dead
+                unset($_SESSION['units'][$key]); //delete if here status dead
             }
         }
-
     }
 }

@@ -26,7 +26,7 @@ class NewgameController extends AbstractController
     {
         if (isset($_POST['load_data'])) {
             $control = new MassController();
-            $control->nextStep($this->unit_arr);
+            $control->nextStep();
             $this->world_arr = $_SESSION['world']->getWorldArr();
             echo(json_encode($this->world_arr));// return world in table
         } else {

@@ -9,7 +9,7 @@ $(document).ready(function () {
             // render world generation arr in table
             var world_gen_obj = JSON.parse(world_gen_arr);
             //statistic
-            $(".coordinates_row").text(world_gen_obj.statistic.coordinates['2']); //view current coordinate first mob
+            $(".coordinates_row").text(world_gen_obj.statistic.coordinates['1']); //view current coordinate first mob
             $(".coordinates_col").text(world_gen_obj.statistic.coordinates['2']);
             $(".health").text(world_gen_obj.statistic['health']);
             $(".energy").text(world_gen_obj.statistic['energy']);
