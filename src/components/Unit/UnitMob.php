@@ -45,6 +45,11 @@ class UnitMob extends AbstractUnit
         $_SESSION['world']->setCurrentStatistic($this->coordinates, $this->health, $this->energy);
     }
 
+    public function lookAround()
+    {
+
+    }
+
     private function unitEat()
     {
         $this->energy = $this->energy + 200; // if unit ate, increase unit energy
