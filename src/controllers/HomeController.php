@@ -15,6 +15,7 @@ class HomeController extends AbstractController
 
         $view = new ViewPage();
         $view->render($this->path, $this->title);
+
     }
 
 }
