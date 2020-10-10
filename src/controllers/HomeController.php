@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     public $data = "page";
     public function actionView()
     {
-
+echo "privet loh";
         $view = new ViewPage();
         $view->render($this->path, $this->title);
     }
