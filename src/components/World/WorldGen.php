@@ -31,8 +31,9 @@ class WorldGen
 
     private function getTerrain() //get random terrain for world map
     {
-        $randomize = array('1' => $this->mountain_symbol
-        , '2' => $this->mountain_symbol
+        $randomize = array(
+            '1' => '2'
+        , '2' => '2'
         , '3' => '#'
         , '4' => '#'
         , '5' => '#'
@@ -40,7 +41,7 @@ class WorldGen
         , '7' => '2'
         , '8' => '2'
         , '9' => '2'
-        , '10' => '2');//mountain  10
+        , '10' => '2');
         $terrain = array_rand($randomize);
         $terrain = $randomize[$terrain];
         return $terrain;

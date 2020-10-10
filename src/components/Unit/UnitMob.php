@@ -16,6 +16,7 @@ class UnitMob extends AbstractUnit
     private $coordinates;
     private $cell_value = 2; // cell value under the unit
     private $status;
+    private $around_values;
 
     function __construct($coordinates)
     {
@@ -45,7 +46,13 @@ class UnitMob extends AbstractUnit
         $_SESSION['world']->setCurrentStatistic($this->coordinates, $this->health, $this->energy);
     }
 
-    public function lookAround()
+    public function lookAround($current_coordinates)
+    {
+        $around_values = $_SESSION['world']->getAroundValue($current_coordinates);
+        $this->around_values = $around_values;
+    }
+
+    public function grabTransmute()
     {
 
     }

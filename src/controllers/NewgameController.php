@@ -13,7 +13,13 @@ class NewgameController extends AbstractController
     private $data = array();
     private $field_row = 20;
     private $field_col = 20;
-    private $unit_arr = array('1'=>'mob','2'=>'mob','3'=>'mob','4'=>'mob','5'=>'mob');
+    private $unit_arr = array('1'=>'mob','2'=>'mob','3'=>'mob','4'=>'mob','5'=>'mob'
+    ,'6'=>'mob','7'=>'mob','8'=>'mob','9'=>'mob'
+    ,'10'=>'mob','11'=>'mob','12'=>'mob','13'=>'mob'
+    ,'14'=>'mob','15'=>'mob','16'=>'mob','17'=>'mob'
+    ,'18'=>'mob','19'=>'mob','20'=>'mob'
+    ,'21'=>'mob','22'=>'mob','23'=>'mob','24'=>'mob'
+    ,'25'=>'mob','26'=>'mob','27'=>'mob','28'=>'mob');
 
     function __construct($path)
     {
