@@ -2,8 +2,8 @@
 
 return array(
     'host' => 'localhost',
-    'dbname' => 'addtest',
-    'user' => 'root',
-    'password' => 'Mysql32al',
+    'dbname' => 'helloword',
+    'user' => 'helloword',
+    'password' => 'Mysqli32Al',
     'charset' => 'utf8',
 );
